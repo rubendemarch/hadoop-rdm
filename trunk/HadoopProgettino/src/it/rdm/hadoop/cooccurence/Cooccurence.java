@@ -103,6 +103,7 @@ public class Cooccurence extends Configured implements Tool {
   
   public static void main(String args[]) throws Exception {
     int res = ToolRunner.run(new Configuration(), new Cooccurence(args), args);
-    System.exit(res);
+    int res2 = ToolRunner.run(new Configuration(), new SortCooccurence(args), args);
+    System.exit(res2);
   }
 }
