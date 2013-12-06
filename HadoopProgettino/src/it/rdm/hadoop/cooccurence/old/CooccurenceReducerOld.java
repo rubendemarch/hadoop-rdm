@@ -1,22 +1,23 @@
-package it.rdm.hadoop.cooccurence;
+package it.rdm.hadoop.cooccurence.old;
 
 import java.io.IOException;
 
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 /**
  * Co-occurence Reducer
  */
-class CooccurenceReducer extends Reducer<
-                TextCouple,           //   input key type
+class CooccurenceReducerOld extends Reducer<
+                Text,           //   input key type
                 LongWritable,    //   input value type
-                TextCouple,           //   output key type
+                Text,           //   output key type
                 LongWritable> {  //   output value type
     
     @Override
     protected void reduce(
-        TextCouple key, // input key type
+        Text key, // input key type
         Iterable<LongWritable> values, // input value type
         Context context) throws IOException, InterruptedException {
 

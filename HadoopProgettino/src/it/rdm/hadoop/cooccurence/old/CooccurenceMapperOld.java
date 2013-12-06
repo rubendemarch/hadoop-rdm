@@ -1,4 +1,4 @@
-package it.rdm.hadoop.cooccurence;
+package it.rdm.hadoop.cooccurence.old;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,10 +11,10 @@ import org.apache.hadoop.mapreduce.Mapper;
 /**
  * Co-occurence Mapper
  */
-class CooccurenceMapper extends Mapper<
+class CooccurenceMapperOld extends Mapper<
                     LongWritable, // input key type passed by TextInputFormat
                     Text,         //  input value type
-                    TextCouple,         // replace Object with output key type
+                    Text,         // replace Object with output key type
                     LongWritable> {//  replace Object with output value type
     
     @Override
@@ -37,7 +37,13 @@ class CooccurenceMapper extends Mapper<
 	            }
 	            for (int i = 0; i < cleanRow.size(); i++) {
 	            	for (int j = 0; j < i; j++) {
-	            		context.write(new TextCouple(cleanRow.get(i), cleanRow.get(j)), new LongWritable(1));
+	            		String string1 = cleanRow.get(i);
+	            		String string2 = cleanRow.get(j);
+	            		if (string1.compareTo(string2)<0){
+	            			context.write(new Text(string1 + " - " + string2), new LongWritable(1));
+		            	} else {
+		            		context.write(new Text(string2 + " - " + string1), new LongWritable(1));
+	            		}
 					}
 				}
             }
