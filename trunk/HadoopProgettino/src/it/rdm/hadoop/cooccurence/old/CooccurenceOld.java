@@ -1,9 +1,10 @@
-package it.rdm.hadoop.cooccurence;
+package it.rdm.hadoop.cooccurence.old;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
@@ -38,7 +39,7 @@ import org.apache.hadoop.util.ToolRunner;
  *
  * Driver class.
  */
-public class Cooccurence extends Configured implements Tool {
+public class CooccurenceOld extends Configured implements Tool {
 
   private int numberOfReducers;
   private Path inputPath;
@@ -67,20 +68,20 @@ public class Cooccurence extends Configured implements Tool {
     job.setInputFormatClass(TextInputFormat.class);
     
     //  set map class
-    job.setMapperClass(CooccurenceMapper.class);
+    job.setMapperClass(CooccurenceMapperOld.class);
     
     //  set map output key and value classes
-    job.setMapOutputKeyClass(TextCouple.class);
+    job.setMapOutputKeyClass(Text.class);
     job.setMapOutputValueClass(LongWritable.class);
     
     //  set reduce class
-    job.setReducerClass(CooccurenceReducer.class);
+    job.setReducerClass(CooccurenceReducerOld.class);
     
     //  set number of reducers
     job.setNumReduceTasks(numberOfReducers);
     
     //  set reduce output key and value classes
-    job.setOutputKeyClass(TextCouple.class);
+    job.setOutputKeyClass(Text.class);
     job.setOutputValueClass(LongWritable.class);
     
     //  set job output format
@@ -90,7 +91,7 @@ public class Cooccurence extends Configured implements Tool {
     return job.waitForCompletion(true) ? 0 : 1;
   }
   
-  public Cooccurence (String[] args) {
+  public CooccurenceOld (String[] args) {
     if (args.length != 3) {
       System.out.println("Usage: WordCount <num_reducers> <input_path> <output_path>");
       System.exit(0);
@@ -102,7 +103,7 @@ public class Cooccurence extends Configured implements Tool {
   }
   
   public static void main(String args[]) throws Exception {
-    int res = ToolRunner.run(new Configuration(), new Cooccurence(args), args);
+    int res = ToolRunner.run(new Configuration(), new CooccurenceOld(args), args);
     System.exit(res);
   }
 }
