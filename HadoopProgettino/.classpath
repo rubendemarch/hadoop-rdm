@@ -5,5 +5,8 @@
 	<classpathentry kind="lib" path="C:/Users/alfasoft/Dropbox/Master Big Data/Database e Data Mining/Esercitazione4/lib/hadoop-common.jar"/>
 	<classpathentry kind="lib" path="C:/Users/alfasoft/Dropbox/Master Big Data/Database e Data Mining/Esercitazione4/lib/hadoop-core.jar"/>
 	<classpathentry kind="lib" path="C:/Users/alfasoft/Dropbox/Master Big Data/Database e Data Mining/Esercitazione4/lib/hadoop-hdfs.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-common.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-core.jar"/>
+	<classpathentry kind="lib" path="lib/hadoop-hdfs.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
