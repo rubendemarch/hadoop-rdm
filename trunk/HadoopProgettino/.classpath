@@ -2,9 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="C:/Users/alfasoft/Dropbox/Master Big Data/Database e Data Mining/Esercitazione4/lib/hadoop-common.jar"/>
-	<classpathentry kind="lib" path="C:/Users/alfasoft/Dropbox/Master Big Data/Database e Data Mining/Esercitazione4/lib/hadoop-core.jar"/>
-	<classpathentry kind="lib" path="C:/Users/alfasoft/Dropbox/Master Big Data/Database e Data Mining/Esercitazione4/lib/hadoop-hdfs.jar"/>
 	<classpathentry kind="lib" path="lib/hadoop-common.jar"/>
 	<classpathentry kind="lib" path="lib/hadoop-core.jar"/>
 	<classpathentry kind="lib" path="lib/hadoop-hdfs.jar"/>
