@@ -104,19 +104,25 @@ public class Cooccurence extends Configured implements Tool {
     Cooccurence.outputDir = new Path(args[2]+File.separator+".."+File.separator+"temp"+System.currentTimeMillis());
   }
   
-  public static void main(String args[]) throws Exception {
-    if (ToolRunner.run(new Configuration(), new Cooccurence(args), args)==0){
-    	int res = ToolRunner.run(new Configuration(), new SortCooccurence(numberOfReducers, outputDir, new Path(args[2])), args);
-    	delete(new File(outputDir.toUri()));
-    	System.exit(res);
-    }
-    else System.exit(1);
+  public static void main(String args[]) throws IOException{
+	int res = 1;
+    try {
+		if (ToolRunner.run(new Configuration(), new Cooccurence(args), args)==0){
+			res = ToolRunner.run(new Configuration(), new SortCooccurence(numberOfReducers, outputDir, new Path(args[2])), args);
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+    delete(new File(outputDir.toString()));
+    System.exit(res);
+	}
   }
   
 
 
   public static void delete(File file) throws IOException{
 
+	System.out.println("Deleting " + file.toString());
   	if(file.isDirectory()){
 
   		//directory is empty, then delete it

@@ -4,6 +4,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
@@ -49,8 +50,11 @@ public class SortCooccurence extends Configured implements Tool {
 		job.setMapperClass(SortingMapper.class);
 
 		// set map output key and value classes
-		job.setMapOutputKeyClass(TextCouple.class);
-		job.setMapOutputValueClass(LongWritable.class);
+		job.setMapOutputKeyClass(LongWritable.class);
+		job.setMapOutputValueClass(Text.class);
+		
+		//set map output comparator, decreasing order
+		job.setSortComparatorClass(LongWritable.DecreasingComparator.class);
 
 		// set reduce class
 		job.setReducerClass(SortingReducer.class);
@@ -59,7 +63,7 @@ public class SortCooccurence extends Configured implements Tool {
 		job.setNumReduceTasks(numberOfReducers);
 
 		// set reduce output key and value classes
-		job.setOutputKeyClass(TextCouple.class);
+		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(LongWritable.class);
 
 		// set job output format

@@ -23,12 +23,12 @@ class CooccurenceMapper extends Mapper<
             Text value,         //  input value type
             Context context) throws IOException, InterruptedException {
 
-            String[] rows = value.toString().split("\\n+");//separo attraverso gli a-capo
+//            String[] rows = value.toString().split("\\n+");//separo attraverso gli a-capo, non serve perché fatto in automatico
             
-            for (String row : rows) {
+//            for (String row : rows) {
 				List<String> cleanRow = new ArrayList<String>();
 				
-				String[] words = row.toString().split("\\s+");
+				String[] words = value.toString().split("\\s+");
 	            for (String string : words) {
 	            	String cleanWord = string.replaceAll("[^\\p{Alpha}]", "").toLowerCase();
 	            	if (!cleanWord.isEmpty() & !cleanRow.contains(cleanWord)){
@@ -40,6 +40,6 @@ class CooccurenceMapper extends Mapper<
 	            		context.write(new TextCouple(cleanRow.get(i), cleanRow.get(j)), new LongWritable(1));
 					}
 				}
-            }
+//            }
     }
 }
