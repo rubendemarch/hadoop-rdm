@@ -1,5 +1,8 @@
 package it.rdm.hadoop.cooccurence;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -40,9 +43,9 @@ import org.apache.hadoop.util.ToolRunner;
  */
 public class Cooccurence extends Configured implements Tool {
 
-  private int numberOfReducers;
+  private static int numberOfReducers;
   private Path inputPath;
-  private Path outputDir;
+  private static Path outputDir;
 
   @Override
   public int run(String[] args) throws Exception {
@@ -92,18 +95,60 @@ public class Cooccurence extends Configured implements Tool {
   
   public Cooccurence (String[] args) {
     if (args.length != 3) {
-      System.out.println("Usage: WordCount <num_reducers> <input_path> <output_path>");
+      System.out.println("Usage: Cooccurence <num_reducers> <input_path> <output_path>");
       System.exit(0);
     }
     
-    this.numberOfReducers = Integer.parseInt(args[0]);
+    Cooccurence.numberOfReducers = Integer.parseInt(args[0]);
     this.inputPath = new Path(args[1]);
-    this.outputDir = new Path(args[2]);
+    Cooccurence.outputDir = new Path(args[2]+File.separator+".."+File.separator+"temp"+System.currentTimeMillis());
   }
   
   public static void main(String args[]) throws Exception {
-    int res = ToolRunner.run(new Configuration(), new Cooccurence(args), args);
-    int res2 = ToolRunner.run(new Configuration(), new SortCooccurence(args), args);
-    System.exit(res2);
+    if (ToolRunner.run(new Configuration(), new Cooccurence(args), args)==0){
+    	int res = ToolRunner.run(new Configuration(), new SortCooccurence(numberOfReducers, outputDir, new Path(args[2])), args);
+    	delete(new File(outputDir.toUri()));
+    	System.exit(res);
+    }
+    else System.exit(1);
+  }
+  
+
+
+  public static void delete(File file) throws IOException{
+
+  	if(file.isDirectory()){
+
+  		//directory is empty, then delete it
+  		if(file.list().length==0){
+
+  		   file.delete();
+  		   System.out.println("Directory is deleted : " + file.getAbsolutePath());
+
+  		}else{
+
+  		   //list all the directory contents
+      	   String files[] = file.list();
+
+      	   for (String temp : files) {
+      	      //construct the file structure
+      	      File fileDelete = new File(file, temp);
+
+      	      //recursive delete
+      	     delete(fileDelete);
+      	   }
+
+      	   //check the directory again, if empty then delete it
+      	   if(file.list().length==0){
+         	     file.delete();
+      	     System.out.println("Directory is deleted : " + file.getAbsolutePath());
+      	   }
+  		}
+
+  	}else{
+  		//if file, then delete it
+  		file.delete();
+  		System.out.println("File is deleted : " + file.getAbsolutePath());
+  	}
   }
 }
