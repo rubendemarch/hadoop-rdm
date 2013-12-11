@@ -24,14 +24,14 @@ import org.apache.hadoop.util.ToolRunner;
  * 
  * mapper(key, value){
  * 	foreach word in value:
- * 		emit(word,nome del fileSplit)
+ * 		emit(word, fileSplit name)
  * }
  * 
  * reducer(key, list(values)){
  * 	set outputString = ""
  * 	foreach value in values:
  * 		if value not in outputString
- * 			outputstring.append value
+ * 			append value to outputstring
  * 	emit(key,outputString)
  * }
  *
