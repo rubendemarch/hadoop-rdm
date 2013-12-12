@@ -53,7 +53,7 @@ public class SortCooccurence extends Configured implements Tool {
 		job.setMapOutputKeyClass(LongWritable.class);
 		job.setMapOutputValueClass(Text.class);
 		
-		//set map output comparator, decreasing order
+		//set map output comparator, DESCENDING ORDER
 		job.setSortComparatorClass(LongWritable.DecreasingComparator.class);
 
 		// set reduce class

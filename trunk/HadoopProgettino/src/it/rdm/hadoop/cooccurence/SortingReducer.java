@@ -21,6 +21,7 @@ public class SortingReducer extends Reducer<LongWritable, Text, Text, LongWritab
         Iterable<Text> values, // input value type
         Context context) throws IOException, InterruptedException {
 
+		//Exchange key with value, for every value
         for (Text coppiaDiParole : values) {
         	context.write(coppiaDiParole, key);
 		}
