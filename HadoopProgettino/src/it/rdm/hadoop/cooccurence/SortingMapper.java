@@ -18,7 +18,10 @@ public class SortingMapper extends Mapper<LongWritable, Text, LongWritable, Text
     		LongWritable key,   //  input key type
             Text value,         //  input value type
             Context context) throws IOException, InterruptedException {
-    	String[] coppia = value.toString().split("\\t+");//per ogni riga di output del reducer separa la coppia di parole e la frequenza
+    	// Creates an array with the couple of words and its frequency 
+    	// (they are separated with the tab character in the previous output)
+    	String[] coppia = value.toString().split("\\t+");
+    	// The emitted key is the frequency, so that Shuffle&Sort sorts by frequency
     	context.write(new LongWritable(Long.parseLong(coppia[1])), new Text(coppia[0]));
     }
     

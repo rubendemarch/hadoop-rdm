@@ -14,7 +14,10 @@ class CooccurenceReducer extends Reducer<
                 TextCouple,           //   output key type
                 LongWritable> {  //   output value type
     
-    @Override
+    /**
+     * It simply emits the key along with the sum of all values in the list.
+     */
+	@Override
     protected void reduce(
         TextCouple key, // input key type
         Iterable<LongWritable> values, // input value type
