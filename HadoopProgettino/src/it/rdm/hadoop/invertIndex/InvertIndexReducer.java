@@ -34,7 +34,7 @@ class InvertIndexReducer extends Reducer<
 				cleanValues.add(string);
         	}
 		}
-        //delete exceeding last space character of String output
+        //Delete exceeding last space character of String output
         output.deleteCharAt(output.length()-1);
         
         context.write(key, new Text(output.toString()));

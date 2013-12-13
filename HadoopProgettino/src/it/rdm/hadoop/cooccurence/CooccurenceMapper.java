@@ -38,7 +38,7 @@ class CooccurenceMapper extends Mapper<
 	            		cleanRow.add(cleanWord);
 	            	}
 	            }
-	            //Exports all possible couples in the list with frequency 1
+	            //Export all possible couples in the list with frequency 1
 	            for (int i = 0; i < cleanRow.size(); i++) {
 	            	for (int j = 0; j < i; j++) {
 	            		context.write(new TextCouple(cleanRow.get(i), cleanRow.get(j)), new LongWritable(1));
