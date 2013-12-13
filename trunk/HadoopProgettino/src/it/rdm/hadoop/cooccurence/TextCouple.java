@@ -31,11 +31,11 @@ public class TextCouple implements WritableComparable<TextCouple> {
 	@Override
 	public int compareTo(TextCouple o) {
 		int b;
-		// Returns the comparison between the two first words, if they are different
+		// Return the comparison between the two first words, if they are different
 		if((b = this.word1.toString().compareTo(o.word1.toString()))!=0){
 			return b;
 		}
-		// Returns the comparison between the two second words, if the two first ones are equal.
+		// Return the comparison between the two second words, if the two first ones are equal.
 		return this.word2.toString().compareTo(o.word2.toString());
 	}
 	

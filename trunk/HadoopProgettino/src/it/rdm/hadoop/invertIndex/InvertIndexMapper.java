@@ -26,9 +26,9 @@ LongWritable, // input key type passed by TextInputFormat
             String[] words = value.toString().split("\\s+");
             
             for (String string : words) {
-            	//remove not alphabetic characters
+            	//Remove not alphabetic characters
             	String cleanWord = string.replaceAll("[^\\p{Alpha}]", "");
-            	//export lowercased word along with the name of the file the word comes from 
+            	//Export lowercased word along with the name of the file the word comes from 
             	if (!cleanWord.isEmpty()) {
 					context.write(new Text(cleanWord.toLowerCase()),new Text(((FileSplit)context.getInputSplit()).getPath().getName()));
 				}

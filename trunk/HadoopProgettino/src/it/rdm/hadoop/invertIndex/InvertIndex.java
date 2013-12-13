@@ -76,9 +76,6 @@ public class InvertIndex extends Configured implements Tool {
     //  set reduce class
     job.setReducerClass(InvertIndexReducer.class);
     
-    // se voglio cambiare l'ordine dell'output
-    //job.setSortComparatorClass(cls);
-    
     //  set number of reducers
     job.setNumReduceTasks(numberOfReducers);
     
